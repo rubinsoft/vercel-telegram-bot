@@ -2,7 +2,7 @@ import { Telegraf } from 'telegraf';
 
 import { about } from './commands';
 import { roll } from './commands';
-import { greeting } from './text';
+import { manageMessages } from './text';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { development, production } from './core';
 
@@ -14,7 +14,7 @@ const bot = new Telegraf(BOT_TOKEN);
 bot.command('about', about());
 bot.command('roll', roll());
 bot.command('r', roll());
-bot.on('message', greeting());
+bot.on('message', manageMessages());
 
 //prod mode (Vercel)
 export const startVercel = async (req: VercelRequest, res: VercelResponse) => {
