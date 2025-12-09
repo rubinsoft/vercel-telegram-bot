@@ -15,6 +15,11 @@ bot.command('about', about());
 bot.command('roll', roll());
 bot.command('r', roll());
 bot.on('message', manageMessages());
+bot.help((ctx) => {
+  ctx.reply(
+    'Available commands:\n/about - Information about the bot\n/roll XdY or /roll XdYdZ - Roll X dice with Y faces (and difficulty Z)\n/r XdY or /r XdYdZ - Shortcut for /roll',
+  );
+});
 
 //prod mode (Vercel)
 export const startVercel = async (req: VercelRequest, res: VercelResponse) => {

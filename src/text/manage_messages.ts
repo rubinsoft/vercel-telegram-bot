@@ -21,7 +21,7 @@ const manageMessages = () => async (ctx: Context) => {
     return;
   }
   if (messageId) {
-    await replyToMessage(ctx, messageId, `Hello, ${userName}!. Write /help for the commands list (message text: "${messageText}")`);
+    await replyToMessage(ctx, messageId, `Hello, ${userName}!. Write /help for the commands list`);
   }
 };
 
