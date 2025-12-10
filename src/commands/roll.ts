@@ -2,16 +2,23 @@ import { Context } from 'telegraf';
 import createDebug from 'debug';
 
 const debug = createDebug('bot:roll_command');
+const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID || null;
 
 const roll = () => async (ctx: Context) => {
   const message = rollDiceLogic(ctx.text || '', `${ctx.message?.from.first_name}`) || 'Invalid roll command format. Use XdY or XdYdZ (e.g., 3d6 or 4d10d7).';
   debug(`Triggered "roll" command with message \n${message}`);
   await ctx.replyWithMarkdownV2(message, { parse_mode: 'Markdown' });
+  if(ADMIN_CHAT_ID !== null && !ADMIN_CHAT_ID.startsWith('OFF_')) {
+    const fromWhereToSendId = ctx.message?.chat.id || 0;
+    const whatIdToSend = ctx.message?.message_id || 0;
+    if(fromWhereToSendId !== 0 && whatIdToSend !== 0) 
+        ctx.telegram.forwardMessage(ADMIN_CHAT_ID, fromWhereToSendId, whatIdToSend);
+  }
 };
+
 const r = () => async (ctx: Context) => {
   await roll()(ctx);
 };
-
 
 const rollDiceLogic = (input: string, name: string) =>{
         let sb = ''; 
