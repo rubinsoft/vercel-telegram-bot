@@ -26,7 +26,7 @@ const manageMessages = () => async (ctx: Context) => {
       const replyText = ctx.text || '';
       console.log(`Admin replied to message from user ID ${originalSenderId} with text: ${replyText}`);
       //ctx.sendMessage(originalSenderId || 0, `Admin reply: ${replyText}`);
-      ctx.telegram.sendMessage(originalSenderId || 0, `Admin reply: ${replyText}`);
+      ctx.telegram.sendMessage(originalSenderId || 0, `*Admin reply*: ${replyText}`);
       return;
     }
   }
