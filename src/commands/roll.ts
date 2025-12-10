@@ -31,6 +31,10 @@ const rollDiceLogic = (input: string, name: string) =>{
         if (numberStr.includes(' ')) {
             numberStr = numberStr.split(' ')[1];
         }
+        //remove "/" if present
+        if (numberStr.startsWith('/')) {
+            numberStr = numberStr.substring(1);
+        }
         
         let number: number;
         let faces: number;

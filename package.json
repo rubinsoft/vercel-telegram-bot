@@ -1,9 +1,9 @@
 {
   "name": "rpg_dice_bot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "RPG Dice Bot for Telegram",
   "main": "src/index.ts",
-  "author": "Firebone (https://github.com/rubinsoft)",
+  "author": "Firebone (@firebone)",
   "homepage": "coming soon...",
   "dependencies": {
     "dotenv-cli": "^8.0.0",

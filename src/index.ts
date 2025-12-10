@@ -2,6 +2,7 @@ import { Telegraf } from 'telegraf';
 
 import { about } from './commands';
 import { roll } from './commands';
+import { debugFn } from './commands';
 import { manageMessages } from './text';
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { development, production } from './core';
@@ -17,6 +18,7 @@ bot.help((ctx) => {
   );
 });
 bot.command('about', about());
+bot.command('debug', debugFn());
 bot.command('roll', roll());
 bot.command('r', roll());
 bot.on('message', manageMessages());
