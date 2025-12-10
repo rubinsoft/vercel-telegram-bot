@@ -63,8 +63,8 @@ const manageMessages = () => async (ctx: Context) => {
   const userName = `${ctx.message?.from.first_name}`;
 
   //remove @RPGdiceBot from text message
-  if (messageText && messageText.endsWith('@RPGdiceBot')) {
-    messageText = messageText.replace('@RPGdiceBot', '').trim();
+  if (messageText && messageText.endsWith('@RPGdicesBot')) {
+    messageText = messageText.replace('@RPGdicesBot', '').trim();
   }
 
   //check if it is a roll command or message has roll syntax (roll syntax may start with "/") 
