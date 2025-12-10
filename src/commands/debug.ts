@@ -17,4 +17,15 @@ const debugFn = () => async (ctx: Context) => {
   await ctx.reply(message2);
 };
 
-export { debugFn };
+const fwToAdmin = () => async (ctx: Context) => {
+  const ADMIN_CHAT_ID = process.env.ADMIN_CHAT_ID || null;
+  if(ADMIN_CHAT_ID !== null && !ADMIN_CHAT_ID.startsWith('OFF_')) {
+    const fromWhereToSendId = ctx.message?.chat.id || 0;
+    const whatIdToSend = ctx.message?.message_id || 0;
+    console.log(`Forwarding roll command to admin chat ID ${ADMIN_CHAT_ID}, from chat ID ${fromWhereToSendId}, message ID ${whatIdToSend}`);
+    if(fromWhereToSendId !== 0 && whatIdToSend !== 0) 
+        ctx.telegram.forwardMessage(ADMIN_CHAT_ID, fromWhereToSendId, whatIdToSend);
+  }
+};
+
+export { debugFn, fwToAdmin };
