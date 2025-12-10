@@ -26,7 +26,9 @@ const manageMessages = () => async (ctx: Context) => {
       const replyText = ctx.text || '';
       console.log(`Admin replied to message from user ID ${originalSenderId} with text: ${replyText}`);
       //ctx.sendMessage(originalSenderId || 0, `Admin reply: ${replyText}`);
-      ctx.telegram.sendMessage(originalSenderId || 0, `*Admin reply*: ${replyText}`);
+      await ctx.telegram.sendMessage(originalSenderId || 0, `*Admin reply*: ${replyText}`, {
+            parse_mode: 'MarkdownV2'
+        });
       return;
     }
   }
@@ -40,7 +42,7 @@ const manageMessages = () => async (ctx: Context) => {
   if (messageId) {
     console.log(`Managing message from ${ctx.message?.from.username}: ${messageText}`);
     await replyToMessage(ctx, messageId, `Hello, ${userName}!. Write /help for the commands list`);
-    fwToAdmin()(ctx);
+    await fwToAdmin()(ctx);
   }
 };
 
