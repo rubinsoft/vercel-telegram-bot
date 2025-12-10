@@ -22,13 +22,14 @@ const manageMessages = () => async (ctx: Context) => {
   if (ctx.chat?.id.toString() === ADMIN_CHAT_ID) {
     const message = ctx.message;
     if (message && ("reply_to_message" in message) ) {
-      const originalSenderId = message.reply_to_message?.from?.id;
-      const replyText = ctx.text || '';
+      const originalSenderId = JSON.stringify(message.reply_to_message);
+      console.log(originalSenderId);
+      /*const replyText = ctx.text || '';
       console.log(`Admin replied to message from user ID ${originalSenderId} with text: ${replyText}`);
       //ctx.sendMessage(originalSenderId || 0, `Admin reply: ${replyText}`);
       await ctx.telegram.sendMessage(originalSenderId || 0, `*Admin reply*: ${replyText}`, {
             parse_mode: 'MarkdownV2'
-        });
+        });*/
       return;
     }
   }
