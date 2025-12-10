@@ -20,16 +20,30 @@ const manageMessages = () => async (ctx: Context) => {
 
   //if the message is a reply and it is from admin, send a message to the original sender
   if (ctx.chat?.id.toString() === ADMIN_CHAT_ID) {
-    const message = ctx.message;
+    let message = ctx.message;
     if (message && ("reply_to_message" in message) ) {
-      const originalSenderId = JSON.stringify(message.reply_to_message);
-      console.log(originalSenderId);
-      /*const replyText = ctx.text || '';
+      let replymessage = message.reply_to_message;
+      //const originalSenderId = JSON.stringify(message.reply_to_message);
+      //console.log(originalSenderId);
+      let replyText = ctx.text || '';
+      //const replyToMessageId = message.reply_to_message?.message_id || '';
+      let originalSenderId = 0;
+      if(replymessage && ("forward_origin" in replymessage) ) {
+        let fwOrigin = replymessage.forward_origin;
+        if(fwOrigin && ("sender_user" in fwOrigin) ) {
+          originalSenderId = fwOrigin.sender_user.id;
+        }
+      }
       console.log(`Admin replied to message from user ID ${originalSenderId} with text: ${replyText}`);
       //ctx.sendMessage(originalSenderId || 0, `Admin reply: ${replyText}`);
       await ctx.telegram.sendMessage(originalSenderId || 0, `*Admin reply*: ${replyText}`, {
-            parse_mode: 'MarkdownV2'
-        });*/
+            parse_mode: 'MarkdownV2',
+            reply_parameters: { message_id: messageId || 0 }
+        }).then(() => {
+            console.log("Message sent to original sender");
+        }).catch((error) => {
+            console.error("Error sending message to original sender:", error);
+        });
       return;
     }
   }
