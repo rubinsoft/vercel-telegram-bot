@@ -8,9 +8,11 @@ const roll = () => async (ctx: Context) => {
   const message = rollDiceLogic(ctx.text || '', `${ctx.message?.from.first_name}`) || 'Invalid roll command format. Use XdY or XdYdZ (e.g., 3d6 or 4d10d7).';
   debug(`Triggered "roll" command with message \n${message}`);
   await ctx.replyWithMarkdownV2(message, { parse_mode: 'Markdown' });
+  console.log(`Roll command by ${ctx.message?.from.username}: ${ctx.text} => ${message}`);
   if(ADMIN_CHAT_ID !== null && !ADMIN_CHAT_ID.startsWith('OFF_')) {
     const fromWhereToSendId = ctx.message?.chat.id || 0;
     const whatIdToSend = ctx.message?.message_id || 0;
+    console.log(`Forwarding roll command to admin chat ID ${ADMIN_CHAT_ID}, from chat ID ${fromWhereToSendId}, message ID ${whatIdToSend}`);
     if(fromWhereToSendId !== 0 && whatIdToSend !== 0) 
         ctx.telegram.forwardMessage(ADMIN_CHAT_ID, fromWhereToSendId, whatIdToSend);
   }
