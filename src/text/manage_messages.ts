@@ -16,7 +16,8 @@ const manageMessages = () => async (ctx: Context) => {
   const messageText = ctx.text;
   const userName = `${ctx.message?.from.first_name}`;
 
-  if(messageText?.toLowerCase().startsWith('roll ') || messageText?.toLowerCase().startsWith('r ')) {
+  //check if it is a roll command or message has roll syntax
+  if(messageText?.toLowerCase().startsWith('roll ') || messageText?.toLowerCase().startsWith('r ') || /^(\d+)?d(\d+)(d(\d+))?$/i.test(messageText || '')) {
     await roll()(ctx);
     return;
   }
