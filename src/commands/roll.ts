@@ -27,7 +27,6 @@ const rollDiceLogic = (input: string, name: string) => {
     }
     let addVector: string[];
 
-    input = input.toLowerCase();
     //remove /roll or /r
     if (input.indexOf('roll ') != -1) {
         input = input.substring(input.toLowerCase().indexOf('roll ') + 5);
