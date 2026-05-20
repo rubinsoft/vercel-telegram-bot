@@ -68,7 +68,7 @@ const manageMessages = () => async (ctx: Context) => {
   }
 
   //check if it is a roll command or message has roll syntax (roll syntax may start with "/") 
-  if (messageText && messageText?.toLowerCase().startsWith('roll ') || messageText?.toLowerCase().startsWith('r ') || /^(\/)?(\d*)d(\d+)(d(\d+))?(( *)(\+)( *)(-)?(\d+))*$/i.test(messageText || '')) {
+  if (messageText && messageText?.toLowerCase().startsWith('roll ') || messageText?.toLowerCase().startsWith('r ') || /^(\/)?(\d+)d(\d+)(d(\d+))?(( *)(\+)( *)(-)?(\d+))*$/i.test(messageText || '')) {
     await roll()(ctx);
     return;
   }
